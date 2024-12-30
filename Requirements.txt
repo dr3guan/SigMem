@@ -1,2 +1,4 @@
 ﻿streamlit
 requests
+pandas
+st-gsheets-connection
