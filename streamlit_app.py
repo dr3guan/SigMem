@@ -13,9 +13,11 @@ if 'memes' not in st.session_state:
 # Utility functions
 def upvote_meme(meme_id):
     st.session_state['memes'].loc[st.session_state['memes']['id'] == meme_id, 'votes'] += 1
+    st.session_state['current_meme'] = meme_index + 1
 
 def downvote_meme(meme_id):
     st.session_state['memes'].loc[st.session_state['memes']['id'] == meme_id, 'votes'] -= 1
+    st.session_state['current_meme'] = meme_index + 1
 
 # App Layout
 st.title("SigMem: Meme Rating Application")
@@ -45,11 +47,11 @@ if menu == "Rate Memes":
             with col1:
                 if st.button("👎 Thumbs Down", key=f"downvote_{meme['id']}"):
                     downvote_meme(meme['id'])
-                    st.session_state['current_meme'] = meme_index + 1
+                    
             with col2:
                 if st.button("👍 Thumbs Up", key=f"upvote_{meme['id']}"):
                     upvote_meme(meme['id'])
-                    st.session_state['current_meme'] = meme_index + 1
+                   
 
         else:
             st.info("No more memes to rate. Check back later!")
