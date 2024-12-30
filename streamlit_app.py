@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import random
+import requests
 
 # Placeholder for memes loaded from Google Drive
 if 'memes' not in st.session_state:
@@ -31,9 +31,15 @@ if menu == "Rate Memes":
         if meme_index < len(st.session_state['memes']):
             meme = st.session_state['memes'].iloc[meme_index]
             
-            # Center the image
-            st.markdown(f"<div style='text-align: center;'><img src='{meme['url']}' alt='{meme['title']}' style='max-width: 100%; height: auto;'></div>", unsafe_allow_html=True)
-            st.markdown(f"<div style='text-align: center; font-weight: bold;'>{meme['title']}</div>", unsafe_allow_html=True)
+            try:
+                # Fetch image using requests
+                response = requests.get(meme['url'])
+                if response.status_code == 200:
+                    st.image(response.content, caption=meme['title'], use_column_width=True)
+                else:
+                    st.error(f"Failed to load image: {meme['title']}")
+            except Exception as e:
+                st.error(f"Error loading image: {e}")
             
             col1, col2 = st.columns(2)
             with col1:
