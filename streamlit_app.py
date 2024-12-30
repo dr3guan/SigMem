@@ -35,7 +35,7 @@ if menu == "Rate Memes":
                 # Fetch image using requests
                 response = requests.get(meme['url'])
                 if response.status_code == 200:
-                    st.image(response.content, caption=meme['title'], use_column_width=True)
+                    st.image(response.content, caption=meme['title'], use_container_width=True)
                 else:
                     st.error(f"Failed to load image: {meme['title']}")
             except Exception as e:
