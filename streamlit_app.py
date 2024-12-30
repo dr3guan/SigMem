@@ -1,19 +1,13 @@
 import streamlit as st
 import pandas as pd
 import random
-import requests
-
-url = f"https://drive.google.com/uc?export=view&id=1BoiKCP48ecrjjGBOsG1ZTbd3JSMBFUht"
-
-response = requests.get(url)
-st.image(response.content)
 
 # Placeholder for memes loaded from Google Drive
 if 'memes' not in st.session_state:
     st.session_state['memes'] = pd.DataFrame([
-        {"id": 1, "title": "Meme 1", "url": "https://drive.google.com/uc?export=view&id=1BoiKCP48ecrjjGBOsG1ZTbd3JSMBFUht", "genre": "Humor", "votes": 0},
-        {"id": 2, "title": "Meme 2", "url": "https://drive.google.com/uc?export=view&id=1OtzbWxK-Zm7BWOKB_R-AgOq1mXkCGZB-", "genre": "Satire", "votes": 0},
-        {"id": 3, "title": "Meme 3", "url": "https://drive.google.com/uc?export=view&id=1GS6TI4rKfMAt_fxohsOz3uIpg2nv7UCU", "genre": "Animals", "votes": 0}
+        {"id": 1, "title": "Meme 1", "url": "https://drive.google.com/uc?export=view&id=example1", "genre": "Humor", "votes": 0},
+        {"id": 2, "title": "Meme 2", "url": "https://drive.google.com/uc?export=view&id=example2", "genre": "Satire", "votes": 0},
+        {"id": 3, "title": "Meme 3", "url": "https://drive.google.com/uc?export=view&id=example3", "genre": "Animals", "votes": 0}
     ])
 
 # Utility functions
@@ -36,7 +30,10 @@ if menu == "Rate Memes":
 
         if meme_index < len(st.session_state['memes']):
             meme = st.session_state['memes'].iloc[meme_index]
-            st.image(meme['url'], caption=meme['title'])
+            
+            # Center the image
+            st.markdown(f"<div style='text-align: center;'><img src='{meme['url']}' alt='{meme['title']}' style='max-width: 100%; height: auto;'></div>", unsafe_allow_html=True)
+            st.markdown(f"<div style='text-align: center; font-weight: bold;'>{meme['title']}</div>", unsafe_allow_html=True)
             
             col1, col2 = st.columns(2)
             with col1:
