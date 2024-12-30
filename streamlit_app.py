@@ -12,12 +12,14 @@ if 'memes' not in st.session_state:
 
 # Utility functions
 def upvote_meme(meme_id):
-    st.session_state['memes'].loc[st.session_state['memes']['id'] == meme_id, 'votes'] += 1
     st.session_state['current_meme'] = meme_index + 1
+    st.session_state['memes'].loc[st.session_state['memes']['id'] == meme_id, 'votes'] += 1
+    
 
 def downvote_meme(meme_id):
-    st.session_state['memes'].loc[st.session_state['memes']['id'] == meme_id, 'votes'] -= 1
     st.session_state['current_meme'] = meme_index + 1
+    st.session_state['memes'].loc[st.session_state['memes']['id'] == meme_id, 'votes'] -= 1
+    
 
 # App Layout
 st.title("SigMem: Meme Rating Application")
