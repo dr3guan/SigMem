@@ -3,7 +3,7 @@ import pandas as pd
 import random
 import requests
 
-url = f"https://drive.google.com/file/d/1BoiKCP48ecrjjGBOsG1ZTbd3JSMBFUht"
+url = f"https://drive.google.com/uc?export=view&id=1BoiKCP48ecrjjGBOsG1ZTbd3JSMBFUht"
 
 response = requests.get(url)
 st.image(response.content)
