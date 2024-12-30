@@ -1,6 +1,12 @@
 import streamlit as st
 import pandas as pd
 import random
+import requests
+
+url = f"https://drive.google.com/file/d/1BoiKCP48ecrjjGBOsG1ZTbd3JSMBFUht/view?usp=drive_link"
+
+response = requests.get(url)
+st.image(response.content)
 
 # Placeholder for memes loaded from Google Drive
 if 'memes' not in st.session_state:
